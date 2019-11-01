@@ -26,6 +26,10 @@ const ExpenseForm = () => {
           />
         </div>
       </div>
+      <button type="submit" className="btn">
+        submit
+        <MdSend className="btn-icon" />
+      </button>
     </form>
   );
 };
