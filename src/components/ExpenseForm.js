@@ -1,7 +1,13 @@
 import React from "react";
 import { MdSend } from "react-icons/md";
 
-const ExpenseForm = () => {
+const ExpenseForm = ({
+  charge,
+  amount,
+  handleCharge,
+  handleAmount,
+  handleSubmit
+}) => {
   return (
     <form>
       <div className="form-center">
