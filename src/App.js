@@ -7,7 +7,9 @@ import ExpenseList from './components/ExpenseList';
 function App() {
   return (
     <>
-      Hello from App
+      <Alert />
+      <ExpenseForm />
+      <ExpenseList />
     </>
   );
 }
