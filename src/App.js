@@ -39,7 +39,7 @@ function App() {
     e.preventDefault();
     if(charge !== '' && amount > 0) {
       const singleExpense = {id:uuid(), charge, amount};
-      setExpenses([singleExpense]);
+      setExpenses([...expenses, singleExpense]);
     } else {
       // handle alert
     }
