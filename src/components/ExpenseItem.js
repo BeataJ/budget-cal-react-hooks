@@ -10,6 +10,14 @@ const ExpenseItem = ({expense}) => {
           <span className="expense">{charge}</span>
           <span className="amount">${amount}</span>
       </div>
+      <div>
+        <button className="edit-btn" aria-label="edit button">
+          <MdEdit />
+        </button>
+        <button className="clear-btn" aria-label="delete button">
+          <MdDelete />
+        </button>
+      </div>
     </li>
   )
 }
