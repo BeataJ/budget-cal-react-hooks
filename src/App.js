@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Alert from "./components/Alert";
 import ExpenseForm from "./components/ExpenseForm";
@@ -22,20 +22,27 @@ function App() {
   // single amount
   const [amount, setAmount] = useState("");
   //  ********** functionality *********
+
   const handleCharge = e => {
-    console.log(`charge: ${e.target.value}`);
+    // console.log(`charge: ${e.target.value}`);
 
     setCharge(e.target.value);
   };
 
   const handleAmount = e => {
-    console.log(`amount: ${e.target.value}`);
+    // console.log(`amount: ${e.target.value}`);
 
     setAmount(e.target.value);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
+    if(charge !== '' && amount > 0) {
+      const singleExpense = {id:uuid(), charge, amount};
+      setExpenses([singleExpense]);
+    } else {
+      // handle alert
+    }
   };
 
   return (
@@ -43,12 +50,12 @@ function App() {
       <Alert />
       <h1>budget calculator</h1>
       <main className="App">
-        <ExpenseForm 
-          charge={charge} 
+        <ExpenseForm
+          charge={charge}
           amount={amount}
           handleCharge={handleCharge}
           handleAmount={handleAmount}
-          handleSubmit={handleSubmit} 
+          handleSubmit={handleSubmit}
         />
         <ExpenseList expenses={expenses} />
       </main>
