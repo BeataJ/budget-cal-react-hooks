@@ -10,7 +10,10 @@ const ExpenseList = ({expenses}) => {
             return <Item key={expense.id} expense={expense} />
         })}
       </ul>
-
+        {expenses.length > 0 && <button className="btn">
+          clear expenses
+          <MdDelete className="btn-icon"/>
+        </button>}
     </>
   )
 }
