@@ -1,12 +1,15 @@
 import React from 'react';
 import Item from './ExpenseItem';
 
-const ExpenseList = () => {
+const ExpenseList = ({expenses}) => {
   return (
-    <div>
-      hi from expense List
-      <Item />
-    </div>
+    <>
+      <ul className="list">
+        {expenses.map((expense) => {
+            return <Item key={expense.id} expense={expense} />
+        })}
+      </ul>
+    </>
   )
 }
 
