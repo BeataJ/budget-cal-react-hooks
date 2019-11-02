@@ -61,6 +61,18 @@ function App() {
       handleAlert({type: 'danger', text: `charge can't be empty value and amount value has to be bigger then zero`})
     }
   };
+  // clear all items
+  const clearItems = () => {
+    console.log('cleared all items');
+  }
+  // handle delete
+  const handleDelete = (id) => {
+    console.log(`item deleted: ${id}`)
+  }
+  // handle edit
+  const handleEdit = (id) => {
+    console.log(`item edited: ${id}`)
+  }
 
   return (
     <>
