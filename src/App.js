@@ -61,6 +61,7 @@ function App() {
          });
          setExpenses(tempExpenses);
          setEdit(false);
+         handleAlert({ type: "success", text: "item edited" });
       } else {
         const singleExpense = { id: uuid(), charge, amount };
         setExpenses([...expenses, singleExpense]);
