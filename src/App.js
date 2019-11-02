@@ -23,8 +23,12 @@ function App() {
   const [amount, setAmount] = useState("");
   // alert
   const [alert, setAlert] = useState({ show: false });
-  //  ********** functionality *********
+  // edit
+  const [edit, setEdit] = useState(false);
+  // edit item
+  const [id, setId] = useState(0);
 
+  //  ********** functionality *********
   // handle charge
   const handleCharge = e => {
     // console.log(`charge: ${e.target.value}`);
@@ -67,13 +71,13 @@ function App() {
   // clear all items
   const clearItems = () => {
     setExpenses([]);
-    handleAlert({type: 'danger', text: 'all items deleted'})
+    handleAlert({ type: "danger", text: "all items deleted" });
   };
   // handle delete
   const handleDelete = id => {
     let tempExpenses = expenses.filter(item => item.id !== id);
     setExpenses(tempExpenses);
-    handleAlert({type: 'danger', text: 'item deleted'})
+    handleAlert({ type: "danger", text: "item deleted" });
   };
   // handle edit
   const handleEdit = id => {
