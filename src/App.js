@@ -22,7 +22,7 @@ function App() {
   // single amount
   const [amount, setAmount] = useState("");
   // alert
-  const [alert, setAlert] = useState({show:false})
+  const [alert, setAlert] = useState({ show: false });
   //  ********** functionality *********
 
   // handle charge
@@ -40,44 +40,47 @@ function App() {
   };
 
   // handle alert
-  const handleAlert = ({type,text}) => {
-    setAlert({show:true,type,text});
+  const handleAlert = ({ type, text }) => {
+    setAlert({ show: true, type, text });
     setTimeout(() => {
-      setAlert({show:false});
-    }, 3000)
-  }
+      setAlert({ show: false });
+    }, 3000);
+  };
 
   // handle submit
   const handleSubmit = e => {
     e.preventDefault();
-    if(charge !== '' && amount > 0) {
-      const singleExpense = {id:uuid(), charge, amount};
+    if (charge !== "" && amount > 0) {
+      const singleExpense = { id: uuid(), charge, amount };
       setExpenses([...expenses, singleExpense]);
-      handleAlert({type: 'success', text: 'item added'});
-      setCharge('');
-      setAmount('');
+      handleAlert({ type: "success", text: "item added" });
+      setCharge("");
+      setAmount("");
     } else {
       // handle alert called
-      handleAlert({type: 'danger', text: `charge can't be empty value and amount value has to be bigger then zero`})
+      handleAlert({
+        type: "danger",
+        text: `charge can't be empty value and amount value has to be bigger then zero`
+      });
     }
   };
   // clear all items
   const clearItems = () => {
-    console.log('cleared all items');
-  }
+    console.log("cleared all items");
+  };
   // handle delete
-  const handleDelete = (id) => {
-    console.log(`item deleted: ${id}`)
-  }
+  const handleDelete = id => {
+    console.log(`item deleted: ${id}`);
+  };
   // handle edit
-  const handleEdit = (id) => {
-    console.log(`item edited: ${id}`)
-  }
+  const handleEdit = id => {
+    console.log(`item edited: ${id}`);
+  };
 
   return (
     <>
-    {alert.show &&  <Alert type={alert.type}  text={alert.text}/> }
-      
+      {alert.show && <Alert type={alert.type} text={alert.text} />}
+
       <h1>budget calculator</h1>
       <main className="App">
         <ExpenseForm
@@ -87,7 +90,12 @@ function App() {
           handleAmount={handleAmount}
           handleSubmit={handleSubmit}
         />
-        <ExpenseList expenses={expenses} />
+        <ExpenseList
+          expenses={expenses}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          clearItems={clearItems}
+        />
       </main>
       <h1>
         total spending:{" "}
