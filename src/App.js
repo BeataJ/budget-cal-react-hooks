@@ -5,13 +5,18 @@ import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import uuid from "uuid/v4";
 
-const initialExpenses = [
-  { id: uuid(), charge: "rent", amount: 1600 },
-  { id: uuid(), charge: "car payment", amount: 400 },
-  { id: uuid(), charge: "credit card bill", amount: 1200 }
-];
+// localStorage.getItem('item name');
+// localStorage.setItem('item name');
 
-// console.log(initialExpenses);
+// const initialExpenses = [
+//   { id: uuid(), charge: "rent", amount: 1600 },
+//   { id: uuid(), charge: "car payment", amount: 400 },
+//   { id: uuid(), charge: "credit card bill", amount: 1200 }
+// ];
+
+const initialExpenses = localStorage.getItem("expenses")
+  ? JSON.parse(localStorage.getItem("expenses"))
+  : [];
 
 function App() {
   // ******** state values *************
@@ -27,7 +32,11 @@ function App() {
   const [edit, setEdit] = useState(false);
   // edit item
   const [id, setId] = useState(0);
-
+  // *********** useEffect ***********
+  useEffect(() => {
+    console.log('we called useEffect');
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses])
   //  ********** functionality *********
   // handle charge
   const handleCharge = e => {
@@ -35,14 +44,12 @@ function App() {
 
     setCharge(e.target.value);
   };
-
   // handle amount
   const handleAmount = e => {
     // console.log(`amount: ${e.target.value}`);
 
     setAmount(e.target.value);
   };
-
   // handle alert
   const handleAlert = ({ type, text }) => {
     setAlert({ show: true, type, text });
@@ -50,18 +57,17 @@ function App() {
       setAlert({ show: false });
     }, 3000);
   };
-
   // handle submit
   const handleSubmit = e => {
     e.preventDefault();
     if (charge !== "" && amount > 0) {
-      if(edit) {
-         let tempExpenses = expenses.map(item => {
-           return item.id === id ? {...item, charge, amount} : item;
-         });
-         setExpenses(tempExpenses);
-         setEdit(false);
-         handleAlert({ type: "success", text: "item edited" });
+      if (edit) {
+        let tempExpenses = expenses.map(item => {
+          return item.id === id ? { ...item, charge, amount } : item;
+        });
+        setExpenses(tempExpenses);
+        setEdit(false);
+        handleAlert({ type: "success", text: "item edited" });
       } else {
         const singleExpense = { id: uuid(), charge, amount };
         setExpenses([...expenses, singleExpense]);
@@ -91,11 +97,11 @@ function App() {
   // handle edit
   const handleEdit = id => {
     let expense = expenses.find(item => item.id === id);
-    let {charge, amount} = expense;
+    let { charge, amount } = expense;
     setCharge(charge);
     setAmount(amount);
     setEdit(true);
-    setId(id)
+    setId(id);
   };
 
   return (
