@@ -21,8 +21,9 @@ function App() {
   const [charge, setCharge] = useState("");
   // single amount
   const [amount, setAmount] = useState("");
+  // alert
+  const [alert, setAlert] = useState({show:false})
   //  ********** functionality *********
-
   const handleCharge = e => {
     // console.log(`charge: ${e.target.value}`);
 
@@ -49,6 +50,7 @@ function App() {
 
   return (
     <>
+    {alert.show &&  <Alert type={alert.type}  text={alert.text}/> }
       <Alert />
       <h1>budget calculator</h1>
       <main className="App">
